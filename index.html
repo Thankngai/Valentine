@@ -2,209 +2,305 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Valentine 💖</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #ffd6dc;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body{
+    margin:0;
+    font-family:sans-serif;
+    background:#ffd6dc;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 
-/* Start button (bigger) */
-#start {
-    font-size: 28px;
-    padding: 18px 44px;
-    border-radius: 40px;
-    border: none;
-    background: #ff4d6d;
-    color: white;
-    cursor: pointer;
+/* ===== TEXT SCALE ===== */
+h1{ font-size:2.4em; margin:15px 0; }
+h2{ font-size:1.8em; margin:15px 0; }
+
+/* ================= PAGE 1 ================= */
+
+#page1{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:100%;
 }
 
-/* Card */
-#valentineBox {
-    position: absolute;
-    width: 760px; /* wider */
-    background: white;
-    padding: 60px;
-    border-radius: 36px;
-    text-align: center;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: 0.6s ease;
-    pointer-events: none;
+#startBtn{
+    font-size:68px;
+    padding:50px 140px;
+    border-radius:80px;
+    border:none;
+    background:#ff4d6d;
+    color:white;
+    cursor:pointer;
+    box-shadow:0 15px 30px rgba(0,0,0,0.3);
+    animation:wiggle 2s infinite ease-in-out;
 }
 
-#valentineBox.show {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
+/* ================= PAGE 2 ================= */
+
+#page2{
+    display:none;
+    background:#f2f2f2;
+    padding:60px;
+    border-radius:35px;
+    width:90%;
+    max-width:800px;
+    text-align:center;
+    position:relative;
 }
 
-/* Question text */
-h1 {
-    font-size: 50px;
-    line-height: 1.6;
-    margin-bottom: 50px;
+#buttons{
+    position:relative;
+    width:100%;
+    height:300px;
+    margin-top:50px;
 }
 
-/* Buttons */
-#buttons {
-    display: flex;
-    justify-content: center;
-    gap: 180px;
+.choice{
+    position:absolute;
+    font-size:36px; /* ลดขนาดลง 30% แล้ว */
+    padding:18px 50px;
+    border-radius:50px;
+    border:none;
+    cursor:pointer;
+    animation:wiggle 2s infinite ease-in-out;
+    transition:left 0.45s ease-out, top 0.45s ease-out;
 }
 
-.btnWrap {
-    position: relative;
-    width: 200px;
-    height: 160px;
+#yes{ background:#ff4d6d; color:white; }
+#no{ background:#888; color:white; }
+
+/* ================= PAGE 3 ================= */
+
+#page3{
+    display:none;
+    background:#f5f5f5;
+    padding:60px;
+    border-radius:35px;
+    width:90%;
+    max-width:850px;
+    text-align:center;
+    position:relative;
 }
 
-button.choice {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(1);
-    font-size: 20px;
-    padding: 10px 26px;
-    border-radius: 26px;
-    border: none;
-    cursor: pointer;
-    transition:
-        left 0.8s ease,
-        top 0.8s ease,
-        transform 0.15s ease;
+/* 🎁 Gift */
+
+.gift-wrapper{
+    margin-top:50px;
+    display:flex;
+    justify-content:center;
 }
 
-button.choice.press {
-    transform: translate(-50%, -50%) scale(0.85);
+.gift{
+    position:relative;
+    width:190px;
+    height:190px;
+    animation:wiggle 2s infinite ease-in-out;
 }
 
-#yes {
-    background: #ff4d6d;
-    color: white;
+.box{
+    width:100%;
+    height:100%;
+    background:linear-gradient(145deg,#ff4d4d,#a80000);
+    border-radius:28px;
+    box-shadow:
+        0 18px 0 #7a0000,
+        0 30px 40px rgba(0,0,0,0.35);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:32px;
+    font-weight:bold;
 }
 
-#no {
-    background: #8c8c8c;
-    color: white;
+.lid{
+    position:absolute;
+    top:-40px;
+    width:100%;
+    height:60px;
+    background:linear-gradient(145deg,#ff6666,#cc0000);
+    border-radius:25px;
+    box-shadow:0 12px 0 #7a0000;
+    transition:transform 0.6s cubic-bezier(.2,.8,.3,1);
+    transform-origin:bottom;
 }
 
-/* Love text page */
-#loveText {
-    font-size: 52px;
-    line-height: 1.7;
+.gift.open .lid{
+    transform:rotateX(130deg);
 }
 
-/* Hearts */
-.heart {
-    position: absolute;
-    font-size: 28px;
-    animation: floatUp 2.4s linear forwards;
+/* ===== Wiggle ===== */
+@keyframes wiggle{
+    0%,100%{ transform:scale(1); }
+    50%{ transform:scale(1.08); }
 }
 
-@keyframes floatUp {
-    from { transform: translateY(0); opacity: 1; }
-    to { transform: translateY(-320px); opacity: 0; }
+/* 🌹 Roses */
+.rose{
+    position:absolute;
+    font-size:95px;
+    pointer-events:none;
+    animation:fly 4s ease-out forwards;
+}
+
+@keyframes fly{
+    0%{
+        transform:translate(-50%,0) scale(0.6);
+        opacity:1;
+    }
+    100%{
+        transform:translate(calc(-50% + var(--x)), var(--y)) scale(1.7);
+        opacity:0;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<button id="start">Click me 💌</button>
+<!-- 🎵 MUSIC -->
+<audio id="bgm" src="music.mp3" loop></audio>
 
-<div id="valentineBox">
-    <h1>
-        Will you be my Valentine? 💖<br>
-        私のバレンタインになってくれますか？
-    </h1>
+<!-- PAGE 1 -->
+<div id="page1">
+    <button id="startBtn">Click me 💌</button>
+</div>
+
+<!-- PAGE 2 -->
+<div id="page2">
+    <h1>Will you be my Valentine? 💖</h1>
+    <h2>私のバレンタインになってくれますか？</h2>
 
     <div id="buttons">
-        <div class="btnWrap">
-            <button id="yes" class="choice">Yes</button>
-        </div>
-        <div class="btnWrap">
-            <button id="no" class="choice">No</button>
+        <button id="yes" class="choice">Yes</button>
+        <button id="no" class="choice">No</button>
+    </div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3">
+    <h1>Happy Valentine’s Day 💖</h1>
+    <h2>ハッピーバレンタインデー 💖</h2>
+    <h1>I love you ❤️</h1>
+    <h2>愛してる ❤️</h2>
+
+    <div class="gift-wrapper" onclick="openGiftLoop()">
+        <div class="gift" id="gift">
+            <div class="lid"></div>
+            <div class="box">For You 🎁</div>
         </div>
     </div>
 </div>
 
 <script>
-const startBtn = document.getElementById("start");
-const box = document.getElementById("valentineBox");
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
+const page1=document.getElementById("page1");
+const page2=document.getElementById("page2");
+const page3=document.getElementById("page3");
+const startBtn=document.getElementById("startBtn");
+const yes=document.getElementById("yes");
+const no=document.getElementById("no");
+const buttons=document.getElementById("buttons");
+const bgm=document.getElementById("bgm");
 
-startBtn.onclick = () => {
-    startBtn.style.display = "none";
-    box.classList.add("show");
+let lastNoX=0,lastNoY=0;
+
+/* ===== Start ===== */
+startBtn.onclick=()=>{
+    page1.style.display="none";
+    page2.style.display="block";
+
+    const center = buttons.clientWidth/2;
+
+    yes.style.left = (center - yes.offsetWidth - 30)+"px";
+    yes.style.top = "120px";
+
+    no.style.left = (center + 30)+"px";
+    no.style.top = "120px";
+
+    lastNoX=no.offsetLeft;
+    lastNoY=no.offsetTop;
 };
 
-function press(btn, duration = 120) {
-    btn.classList.add("press");
-    setTimeout(() => btn.classList.remove("press"), duration);
+/* ===== Move NO ===== */
+function moveNo(){
+    const maxX=buttons.clientWidth-no.offsetWidth;
+    const maxY=buttons.clientHeight-no.offsetHeight;
+
+    let x,y;
+    do{
+        x=Math.random()*maxX;
+        y=Math.random()*maxY;
+    }while(
+        (x < yes.offsetLeft + yes.offsetWidth &&
+        x + no.offsetWidth > yes.offsetLeft &&
+        y < yes.offsetTop + yes.offsetHeight &&
+        y + no.offsetHeight > yes.offsetTop)
+        ||
+        (Math.abs(x-lastNoX)<80 && Math.abs(y-lastNoY)<80)
+    );
+
+    no.style.left=x+"px";
+    no.style.top=y+"px";
+
+    lastNoX=x;
+    lastNoY=y;
 }
 
-noBtn.onclick = () => {
-    press(noBtn);
+no.onmouseover=moveNo;
+no.onclick=moveNo;
 
-    if (navigator.vibrate) {
-        navigator.vibrate([120, 80, 120]);
+/* ===== YES CLICK ===== */
+yes.onclick=()=>{
+    bgm.play(); // ▶️ เล่นเพลง
+    page2.style.display="none";
+    page3.style.display="block";
+};
+
+/* ===== Roses ===== */
+function openGiftLoop(){
+    const gift=document.getElementById("gift");
+    gift.classList.add("open");
+
+    let count=0;
+    const interval=setInterval(()=>{
+        shootRoses();
+        count++;
+        if(count>=5) clearInterval(interval);
+    },900);
+}
+
+function shootRoses(){
+    const gift=document.getElementById("gift");
+
+    for(let i=0;i<18;i++){
+        const rose=document.createElement("div");
+        rose.className="rose";
+        rose.innerHTML="🌹";
+
+        rose.style.left="50%";
+        rose.style.top="0px";
+
+        const angle=Math.PI + (Math.random()*Math.PI);
+        const distance=450+Math.random()*350;
+
+        const x=Math.cos(angle)*distance;
+        const y=Math.sin(angle)*distance;
+
+        rose.style.setProperty('--x',x+'px');
+        rose.style.setProperty('--y',y+'px');
+
+        gift.appendChild(rose);
+
+        setTimeout(()=>rose.remove(),4000);
     }
-
-    const wrap = noBtn.parentElement;
-    const step = 120;
-
-    const dirs = [
-        {x: step, y: 0}, {x: -step, y: 0},
-        {x: 0, y: step}, {x: 0, y: -step},
-        {x: step, y: step}, {x: -step, y: step},
-        {x: step, y: -step}, {x: -step, y: -step}
-    ];
-
-    const move = dirs[Math.floor(Math.random() * dirs.length)];
-
-    let left = noBtn.offsetLeft + move.x;
-    let top = noBtn.offsetTop + move.y;
-
-    left = Math.max(0, Math.min(left, wrap.clientWidth - noBtn.offsetWidth));
-    top = Math.max(0, Math.min(top, wrap.clientHeight - noBtn.offsetHeight));
-
-    setTimeout(() => {
-        noBtn.style.left = left + "px";
-        noBtn.style.top = top + "px";
-    }, 120);
-};
-
-yesBtn.onclick = () => {
-    press(yesBtn);
-
-    box.innerHTML = `
-        <div id="loveText">
-            Happy Valentine’s Day 💖<br>
-            ハッピーバレンタインデー 💖<br><br>
-            I love you ❤️<br>
-            愛してる ❤️
-        </div>
-    `;
-
-    setInterval(() => {
-        const heart = document.createElement("div");
-        heart.className = "heart";
-        heart.textContent = "❤️";
-        heart.style.left = Math.random() * window.innerWidth + "px";
-        heart.style.bottom = "0px";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 2400);
-    }, 160);
-};
+}
 </script>
 
 </body>
